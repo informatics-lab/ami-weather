@@ -2,32 +2,49 @@
   "name": "ami.js",
   "version": "0.0.16-dev",
   "main": "src/ami.js",
-  "keywords": ["ami", "ami.js","three.js", "webgl", "dicom", "nifti", "awesome", "medical", "imaging", "xtk", "nrrd", "vtk", "stl", "trk"],
+  "keywords": [
+    "ami",
+    "ami.js",
+    "three.js",
+    "webgl",
+    "dicom",
+    "nifti",
+    "awesome",
+    "medical",
+    "imaging",
+    "xtk",
+    "nrrd",
+    "vtk",
+    "stl",
+    "trk"
+  ],
   "author": {
-    "name" : "Nicolas Rannou",
-    "email" : "nicolas@eunate.ch",
-    "url" : "https://eunate.ch"
+    "name": "Nicolas Rannou",
+    "email": "nicolas@eunate.ch",
+    "url": "https://eunate.ch"
   },
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://fnndsc.github.io/ami"
   },
-  "config" : { 
+  "config": {
     "threeVersion": "r83",
     "amiCDN": "https://cdnjs.cloudflare.com/ajax/libs/ami.js/",
     "gaKey": "UA-39303022-3",
-    "transforms" : "-t [babelify --presets [ es2015 ] ]"
+    "transforms": "-t [babelify --presets [ es2015 ] ]"
   },
   "dependencies": {
     "dicom-parser": "1.7.3",
     "image-JPEG2000": "OHIF/image-JPEG2000#master",
+    "jpeg-js": "^0.2.0",
     "jpeg-lossless-decoder-js": "1.2.3",
     "math-float32-to-binary-string": "^1.0.0",
-    "nrrd-js": "^0.2.1",
     "nifti-reader-js": "v0.5.3",
-    "pako": "1.0.1"
-    },
+    "nrrd-js": "^0.2.1",
+    "pako": "1.0.1",
+    "pixel": "0.0.4"
+  },
   "scripts": {
     "dist:prepare": "node ./scripts/$npm_package_config_mode.js --dist",
     "dist:watchAmi": "watchify -d src/ami $npm_package_config_transforms --standalone AMI -o dist/build/ami.js -v",

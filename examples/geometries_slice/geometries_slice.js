@@ -150,8 +150,9 @@ window.onload = function() {
     return 'https://cdn.rawgit.com/FNNDSC/data/master/dicom/adi_brain/' + v;
 
   });
-
-  loader.load(files)
+  //loader.load(['/examples/geometries_slice/index.html'])
+  loader.load(['/examples/geometries_slice/gust.5400x6000x3.rawjpg'])
+  //loader.load(files)
   .then( function() {
 
     let series = loader.data[0].mergeSeries( loader.data )[0];
@@ -223,5 +224,3 @@ window.onload = function() {
     window.console.log( error );
   });
 };
-
-

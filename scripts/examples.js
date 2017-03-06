@@ -41,7 +41,16 @@ fs.readdir(targetDir, function(e, files) {
     const lessonContentHMTL = path.join(lessonTargetDir, lessonName + '.html');
     const lessonDestDir = path.join(destDir, lessonName);
     const lessonDestFile = path.join(lessonDestDir, destFile);
-    const toCopy = [lessonName+'.css'];
+    const toCopy = [];
+    const dirContent = fs.readdirSync(lessonTargetDir);
+    // Copy any extra static files
+    for (var i = 0; i < dirContent.length; i++) {
+      let file = dirContent[i];
+      if(!fs.lstatSync(path.join(lessonTargetDir, file)).isDirectory()) {
+        toCopy.push(file);
+      }
+    }
+
     const exampleTemplate = new ExampleTemplate.ExampleTemplate();
     exampleTemplate.name = lessonName;
     exampleTemplate.content = fs.readFileSync(lessonContentHMTL, 'utf8');
@@ -57,18 +66,16 @@ fs.readdir(targetDir, function(e, files) {
     toCopy.forEach(function(file) {
       let targetFile = path.join(lessonTargetDir, file);
       let destFile = path.join(lessonDestDir, file);
-      fs.readFile(targetFile, 'utf8', function(err, data) {
-        if (err) {
-          return console.log(err);
-        }
-
-        fs.writeFile(destFile, data, (err) => {
-        if (err) throw err;
-          console.log('Write: ' + destFile);
-        });
+      let rs = fs.createReadStream(targetFile);
+      let ws = rs.pipe(fs.createWriteStream(destFile));
+      rs.on('error', function(err) {
+        console.log('Read: ' + targetFile, err);
+        throw err;
       });
-
-      fs.createReadStream(targetFile).pipe(fs.createWriteStream(destFile));
+      ws.on('error', function(err) {
+        console.log('Write: ' + destFile, err);
+        throw err;
+      });
     });
 
     fs.writeFile(lessonDestFile, exampleTemplate.html(), (err) => {

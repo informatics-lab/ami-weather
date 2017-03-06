@@ -9,6 +9,7 @@ import ModelsFrame from '../../src/models/models.frame';
 import ParsersDicom from '../../src/parsers/parsers.dicom';
 import ParsersNifti from '../../src/parsers/parsers.nifti';
 import ParsersNrrd from '../../src/parsers/parsers.nrrd';
+import ParsersStackedJPG from '../../src/parsers/parsers.stackedjpg';
 
 
 /**
@@ -150,6 +151,7 @@ export default class LoadersVolumes extends LoadersBase {
                   // recursive call for each frame
                   // better than for loop to be able
                   // to update dom with "progress" callback
+
                   setTimeout(
                     this.parseFrame(
                       series, stack, response.url, 0,
@@ -227,6 +229,9 @@ export default class LoadersVolumes extends LoadersBase {
     let Parser = null;
 
     switch (extension.toUpperCase()) {
+      case 'RAWJPG':
+        Parser = ParsersStackedJPG;
+        break;
       case 'NII':
       case 'NII_':
         Parser = ParsersNifti;
