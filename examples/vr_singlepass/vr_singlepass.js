@@ -167,11 +167,31 @@ window.onload = function() {
   init();
 
   let filename = 'https://cdn.rawgit.com/FNNDSC/data/master/nifti/eun_brain/eun_uchar_8.nii.gz';
-
+  var files = ['pres_levels_large/cloud.2700x3000x3.6.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.15.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.19.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.2.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.11.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.17.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.8.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.0.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.13.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.4.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.7.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.16.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.12.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.3.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.18.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.9.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.1.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.10.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.5.rawjpg.jpg',
+               'pres_levels_large/cloud.2700x3000x3.14.rawjpg.jpg'];
   // load sequence for each file
   // instantiate the loader
+
   let loader = new LoadersVolume(threeD);
-  loader.load(filename)
+  loader.load(files)
   .then(() => {
     let series = loader.data[0].mergeSeries(loader.data)[0];
     loader.free();

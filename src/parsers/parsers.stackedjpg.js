@@ -18,9 +18,6 @@
 /** * Imports ***/
 import ParsersVolume from './parsers.volume';
 
-
-//let jpeg = require('jpeg-js');
-
 let jpgdecoder = require('./decoder');
 
 /**
@@ -36,6 +33,7 @@ export default class ParsersStackedJPG extends ParsersVolume {
     */
     this._id = id;
     let size = data.filename.split('.')[1].split('x');
+    this._index = Number(data.filename.split('.')[2]);
     size = [Number(size[0]), Number(size[1]), Number(size[2])];
     this._jpg = jpgdecoder(data.buffer, size[0], size[1], size[2]);
     this._data = this._jpg.data;
@@ -45,7 +43,9 @@ export default class ParsersStackedJPG extends ParsersVolume {
 
   seriesInstanceUID() {
     // use filename + timestamp..?
-    return this._url;
+    let filenameParts = this._url.split('.');
+    let id = filenameParts[0] + filenameParts[1];
+    return id;
   }
 
   numberOfFrames() {
@@ -95,7 +95,7 @@ export default class ParsersStackedJPG extends ParsersVolume {
   }
 
   pixelSpacing(frameIndex = 0) {
-    return [0.1, 0.1, 1];
+    return [0.1, 0.1, 2];
   }
 
   sliceThickness() {
@@ -108,7 +108,7 @@ export default class ParsersStackedJPG extends ParsersVolume {
   }
 
   imagePosition(frameIndex = 0) {
-    return null;
+    return [0, 0, 0.03 * (this._index * 3 + frameIndex)];
   }
 
   dimensionIndexValues(frameIndex = 0) {
@@ -153,7 +153,7 @@ export default class ParsersStackedJPG extends ParsersVolume {
     let offset = this.numberOfChannels() * frameIndex * this.columns() * this.rows();
     // return new Uint8Array(buffer, frameOffset, numPixels);
     let pxData = this._data.subarray(offset, offset + this.columns() * this.rows());
-    // pxData = new Uint8Array(this._data.buffer, offset, this.columns() * this.rows());  
+    // pxData = new Uint8Array(this._data.buffer, offset, this.columns() * this.rows());
     return pxData;
   }
 

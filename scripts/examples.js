@@ -41,15 +41,38 @@ fs.readdir(targetDir, function(e, files) {
     const lessonContentHMTL = path.join(lessonTargetDir, lessonName + '.html');
     const lessonDestDir = path.join(destDir, lessonName);
     const lessonDestFile = path.join(lessonDestDir, destFile);
-    const toCopy = [];
-    const dirContent = fs.readdirSync(lessonTargetDir);
+    //const toCopy = [];
+    //const dirContent = fs.readdirSync(lessonTargetDir);
+
     // Copy any extra static files
-    for (var i = 0; i < dirContent.length; i++) {
-      let file = dirContent[i];
-      if(!fs.lstatSync(path.join(lessonTargetDir, file)).isDirectory()) {
-        toCopy.push(file);
+    function dirToFiles(dir, prefix) {
+      prefix = prefix || '';
+      let dirContent = fs.readdirSync(dir);
+      let files = [];
+      let toCopy = [];
+      for (let i = 0; i < dirContent.length; i++) {
+        let item = dirContent[i];
+        let itempath = path.join(dir, item);
+        if(!fs.lstatSync(itempath).isDirectory()) {
+          toCopy.push(prefix + item);
+        } else {
+          let subfiles = dirToFiles(itempath, item + '/');
+          for (let j = 0; j < subfiles.length; j++) {
+            toCopy.push(subfiles[j]);
+          }
+        }
       }
+      return toCopy;
     }
+
+    // for (var i = 0; i < dirContent.length; i++) {
+    //   let file = dirContent[i];
+    //   if(!fs.lstatSync(path.join(lessonTargetDir, file)).isDirectory()) {
+    //     toCopy.push(file);
+    //   }
+    // }
+    let toCopy = dirToFiles(lessonTargetDir);
+    console.log(toCopy);
 
     const exampleTemplate = new ExampleTemplate.ExampleTemplate();
     exampleTemplate.name = lessonName;
@@ -64,8 +87,18 @@ fs.readdir(targetDir, function(e, files) {
 
     // copy static files to right location
     toCopy.forEach(function(file) {
+      console.log('to copy file',file,lessonTargetDir,lessonDestDir);
       let targetFile = path.join(lessonTargetDir, file);
       let destFile = path.join(lessonDestDir, file);
+      if(file.split('/').length > 1){
+        // Need to create a sub folder.
+        let bits = file.split('/');
+        delete bits[bits.length -1];
+        let dir = path.join(lessonDestDir, bits.join('/'));
+        if(!fs.existsSync(dir)){
+          fs.mkdirSync(dir);
+        }
+      }
       let rs = fs.createReadStream(targetFile);
       let ws = rs.pipe(fs.createWriteStream(destFile));
       rs.on('error', function(err) {

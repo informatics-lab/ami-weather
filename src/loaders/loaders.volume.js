@@ -230,6 +230,7 @@ export default class LoadersVolumes extends LoadersBase {
 
     switch (extension.toUpperCase()) {
       case 'RAWJPG':
+      case 'JPG':
         Parser = ParsersStackedJPG;
         break;
       case 'NII':

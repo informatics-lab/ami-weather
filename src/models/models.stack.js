@@ -42,7 +42,7 @@ export default class ModelsStack extends ModelsBase {
     this._pixelType = 0;
     this._pixelRepresentation = 0;
 
-    this._textureSize = 4096;
+    this._textureSize = 4096 * 3; // TODO: Figure out what if the line below is also a fix and what is best...
     this._nbTextures = 7; // HIGH RES..
     this._rawData = [];
 
@@ -218,7 +218,7 @@ export default class ModelsStack extends ModelsBase {
 
     // compute transforms
     this.computeIJK2LPS();
-  
+
     this.computeLPS2AABB();
     // this.packEchos();
 
@@ -330,7 +330,7 @@ export default class ModelsStack extends ModelsBase {
   }
 
   /**
-   * 
+   *
    */
   zSpacing() {
     if (this._numberOfFrames > 1) {
