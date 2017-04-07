@@ -88,26 +88,26 @@ window.onload = function() {
   // it loads and parses the dicom image
   var loader = new LoadersVolume();
 
-  var files = ['pres_levels_large/cloud.2700x3000x3.6.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.15.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.19.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.2.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.11.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.17.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.8.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.0.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.13.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.4.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.7.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.16.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.12.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.3.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.18.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.9.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.1.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.10.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.5.rawjpg.jpg',
-               'pres_levels_large/cloud.2700x3000x3.14.rawjpg.jpg'];
+  var files = ['pres_levels/cloud.270x300x3.6.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.15.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.19.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.2.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.11.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.17.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.8.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.0.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.13.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.4.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.7.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.16.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.12.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.3.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.18.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.9.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.1.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.10.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.5.rawjpg.jpg',
+               'pres_levels/cloud.270x300x3.14.rawjpg.jpg'];
 
   loader.load(files)
   .then(function() {

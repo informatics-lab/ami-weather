@@ -1,20 +1,3 @@
-// use nifti-js and just parse header.???
-
-// Slicer way to handle images
-// should follow it...
- // 897   if ( (this->IndexSeriesInstanceUIDs[k] != idxSeriesInstanceUID && this->IndexSeriesInstanceUIDs[k] >= 0 && idxSeriesInstanceUID >= 0) ||
- // 898        (this->IndexContentTime[k] != idxContentTime && this->IndexContentTime[k] >= 0 && idxContentTime >= 0) ||
- // 899        (this->IndexTriggerTime[k] != idxTriggerTime && this->IndexTriggerTime[k] >= 0 && idxTriggerTime >= 0) ||
- // 900        (this->IndexEchoNumbers[k] != idxEchoNumbers && this->IndexEchoNumbers[k] >= 0 && idxEchoNumbers >= 0) ||
- // 901        (this->IndexDiffusionGradientOrientation[k] != idxDiffusionGradientOrientation  && this->IndexDiffusionGradientOrientation[k] >= 0 && idxDiffusionGradientOrientation >= 0) ||
- // 902        (this->IndexSliceLocation[k] != idxSliceLocation && this->IndexSliceLocation[k] >= 0 && idxSliceLocation >= 0) ||
- // 903        (this->IndexImageOrientationPatient[k] != idxImageOrientationPatient && this->IndexImageOrientationPatient[k] >= 0 && idxImageOrientationPatient >= 0) )
- // 904     {
- // 905       continue;
- // 906     }
-
-// http://brainder.org/2012/09/23/the-nifti-file-format/
-
 /** * Imports ***/
 import ParsersVolume from './parsers.volume';
 
@@ -95,7 +78,8 @@ export default class ParsersStackedJPG extends ParsersVolume {
   }
 
   pixelSpacing(frameIndex = 0) {
-    return [0.1, 0.1, 2];
+    var x_y_size = 0.05*2700/this._dataSet.sizes[0]; // This has no re-world validity. Just tuning to look right for my images.
+    return [x_y_size, x_y_size, 1];
   }
 
   sliceThickness() {
